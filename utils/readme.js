@@ -4,7 +4,8 @@ const readme = fs.readFileSync(__dirname + '/README.template.md', 'utf8');
 const CASES = require('./cases');
 const {json}=require('stream/consumers');
 
-const casesStr = CASES.map(([ description, queryString, input, output ]) => {
+const casesStr = CASES.map(([ description, queryString, input, output, ignoreForReadme ]) => {
+  if (ignoreForReadme) return '';
   return `
 ### ${description}
 

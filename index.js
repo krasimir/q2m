@@ -16,7 +16,11 @@ function parse(obj) {
           const field = match[2];
           const value = obj[key];
           if (!res['$nor']) res['$nor'] = [];
-          res['$nor'][index] = { [field]: parseStringValue(value) };
+          if (value) {
+            res['$nor'][index] = { [field]: parseStringValue(value) };
+          } else {
+            res['$nor'] = false;
+          }
         }
       } else if (key.match(OR_REGEXP)) {
         const match = key.match(OR_REGEXP);
@@ -25,7 +29,11 @@ function parse(obj) {
           const field = match[2];
           const value = obj[key];
           if (!res['$or']) res['$or'] = [];
-          res['$or'][index] = { [field]: parseStringValue(value) };
+          if (value) {
+            res['$or'][index] = { [field]: parseStringValue(value) };
+          } else {
+            res['$or'] = false;
+          }
         }
       } else if (key.match(AND_REGEXP)) {
         const match = key.match(AND_REGEXP);
@@ -34,7 +42,11 @@ function parse(obj) {
           const field = match[2];
           const value = obj[key];
           if (!res['$and']) res['$and'] = [];
-          res['$and'][index] = { [field]: parseStringValue(value) };
+          if (value) {
+            res['$and'][index] = { [field]: parseStringValue(value) };
+          } else {
+            res['$and'] = false;
+          }
         }
       } else {
         res[key] = parseStringValue(value);
@@ -48,16 +60,20 @@ function parse(obj) {
         res[key] = { $in: value };
       } else if (key.match(/\[or\]$/)) {
         key = key.replace(/\[or\]$/, '');
-        res['$or'] = value.map(v => ({ [key]: parseStringValue(v) }));
+        res['$or'] = value.map(v => v ? ({ [key]: parseStringValue(v) }) : false).filter(Boolean);
       } else if (key.match(/\[and\]$/)) {
         key = key.replace(/\[and\]$/, '');
-        res['$and'] = value.map(v => ({ [key]:  parseStringValue(v) }));
+        res['$and'] = value.map(v => v ? ({ [key]:  parseStringValue(v) }) : false).filter(Boolean);
       } else if (key.match(/\[nor\]$/)) {
         key = key.replace(/\[nor\]$/, '');
-        res['$nor'] = value.map(v => ({ [key]:  parseStringValue(v) }));
+        res['$nor'] = value.map(v => ({ [key]: v ? parseStringValue(v) : false })).filter(Boolean);
       }
     }
   });
+
+  if (res['$or']) { res['$or'] = res['$or'].filter(Boolean); }
+  if (res['$and']) { res['$and'] = res['$and'].filter(Boolean); }
+  if (res['$nor']) { res['$nor'] = res['$nor'].filter(Boolean); }
 
   return res;
 }
