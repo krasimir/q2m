@@ -1,6 +1,6 @@
 {
   "name": "q2m",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Transfrom the params passed via GET to a properly written MongoDB query object",
   "main": "index.js",
   "scripts": {

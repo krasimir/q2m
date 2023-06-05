@@ -18,7 +18,7 @@ ${JSON.stringify(input, null, 2)}
 Output:
 \`\`\`json
 ${JSON.stringify(output, null, 2)}
-\`\`\
+\`\`\`
 `
 }).join('');
 
