@@ -22,6 +22,13 @@ module.exports = [
     { $or: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
   ],
   [
+    '$or (variant 2)',
+    undefined,
+    { or: [ { a: '>20' }, { b: '$bar'} ] },
+    { $or: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] },
+    true
+  ],
+  [
     '$or',
     'or[0][a]=&or[1][b]=$bar',
     { 'or[0][a]': '', 'or[1][b]': '$bar' },

@@ -40,7 +40,14 @@ function parse(obj) {
         res[key] = parseStringValue(value);
       }
     } else if (Array.isArray(value)) {
-      if (key.match(/\!\[\]$/)) {
+      if (key === 'or' || key === 'and' || key === 'nor') {
+        res['$' + key] = value.map(criteria => {
+          Object.keys(criteria).forEach(cKey => {
+            criteria[cKey] = parseStringValue(criteria[cKey]);
+          });
+          return criteria;
+        });
+      } else if (key.match(/\!\[\]$/)) {
         key = key.replace(/\!\[\]$/, '');
         res[key] = { $nin: value };
       } else if (key.match(/\[\]$/)) {
