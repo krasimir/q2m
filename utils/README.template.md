@@ -19,5 +19,5 @@ parse({ foo: 'bar' });
 
 ## Mapping
 
-_(Have in mind that for the query string to object convertion the library uses [qs](https://www.npmjs.com/package/qs) )_
+_(The conversion from query string to object in the examples below is made with [qs](https://www.npmjs.com/package/qs) )_
 {cases}
