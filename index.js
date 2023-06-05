@@ -57,24 +57,6 @@ function parse(obj) {
       } else {
         res[key] = { $in: value };
       }
-      /*
-      } else if (key.match(/\!\[\]$/)) {
-        key = key.replace(/\!\[\]$/, '');
-        res[key] = { $nin: value };
-      } else if (key.match(/\[\]$/)) {
-        key = key.replace(/\[\]$/, '');
-        res[key] = { $in: value };
-      } else if (key.match(/\[or\]$/)) {
-        key = key.replace(/\[or\]$/, '');
-        res['$or'] = value.map(v => v ? ({ [key]: parseStringValue(v) }) : false).filter(Boolean);
-      } else if (key.match(/\[and\]$/)) {
-        key = key.replace(/\[and\]$/, '');
-        res['$and'] = value.map(v => v ? ({ [key]:  parseStringValue(v) }) : false).filter(Boolean);
-      } else if (key.match(/\[nor\]$/)) {
-        key = key.replace(/\[nor\]$/, '');
-        res['$nor'] = value.map(v => ({ [key]: v ? parseStringValue(v) : false })).filter(Boolean);
-      }
-      */
     }
   });
 
