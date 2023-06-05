@@ -50,4 +50,6 @@ module.exports = [
     { $nor: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
   ],
   ['$regex', 'foo=$bar', { foo: '$bar' }, { foo: { $regex: new RegExp('bar'), $options: 'i' } }],
+  ['$regex', 'foo=%24bar', { foo: '$bar' }, { foo: { $regex: new RegExp('bar'), $options: 'i' } }, true],
+  ['$regex', undefined, { foo: '%24bar' }, { foo: { $regex: new RegExp('bar'), $options: 'i' } }, true],
 ];

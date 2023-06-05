@@ -66,6 +66,7 @@ function parse(obj) {
   return res;
 }
 function parseStringValue(value) {
+  value = decodeURIComponent(value);
   if (value.match(/^\!=/)) {
     return { $exists: false };
   } else if (value.match(/^\!/)) {
