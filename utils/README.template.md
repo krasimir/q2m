@@ -10,7 +10,7 @@ I needed to query MongoDB database from the URL. Basically transfrom the params 
 
 First, get the library via `npm install q2m` or `yarn install q2m`. Then:
 
-```
+```js
 const { parse } = require('q2m');
 
 parse({ foo: 'bar' });
