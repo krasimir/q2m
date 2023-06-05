@@ -1,5 +1,6 @@
 function parse(obj) {
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return {};
+  obj = clone(obj);
 
   const OR_REGEXP = /or\[(.*)\]\[(.*)\]$/;
   const AND_REGEXP = /and\[(.*)\]\[(.*)\]$/;
@@ -113,4 +114,7 @@ function isNumeric(value) {
 }
 function isObjectEmpty(obj) {
   return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
 }
