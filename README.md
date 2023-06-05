@@ -37,7 +37,8 @@ Output:
     "$eq": "bar"
   }
 }
-``
+```
+
 ### $ne
 
 Query string: `foo=!bar`
@@ -56,7 +57,8 @@ Output:
     "$ne": "bar"
   }
 }
-``
+```
+
 ### $exists
 
 Query string: `foo==bar`
@@ -75,7 +77,8 @@ Output:
     "$exists": true
   }
 }
-``
+```
+
 ### $exists
 
 Query string: `foo=!=bar`
@@ -94,7 +97,8 @@ Output:
     "$exists": false
   }
 }
-``
+```
+
 ### $gt
 
 Query string: `foo=>20`
@@ -113,7 +117,8 @@ Output:
     "$gt": 20
   }
 }
-``
+```
+
 ### $gte
 
 Query string: `foo=>=20`
@@ -132,7 +137,8 @@ Output:
     "$gte": 20
   }
 }
-``
+```
+
 ### $lt
 
 Query string: `foo=<20`
@@ -151,7 +157,8 @@ Output:
     "$lt": 20
   }
 }
-``
+```
+
 ### $lte
 
 Query string: `foo=<=20`
@@ -170,7 +177,8 @@ Output:
     "$lte": 20
   }
 }
-``
+```
+
 ### $in
 
 Query string: `foo[]=a&foo[]=b`
@@ -195,7 +203,8 @@ Output:
     ]
   }
 }
-``
+```
+
 ### $nin
 
 Query string: `foo![]=a&foo![]=b`
@@ -220,7 +229,8 @@ Output:
     ]
   }
 }
-``
+```
+
 ### $or
 
 Query string: `foo[or]=a&foo[or]=b`
@@ -251,7 +261,8 @@ Output:
     }
   ]
 }
-``
+```
+
 ### $or
 
 Query string: `foo[or]=$bar&foo[or]=>20`
@@ -283,7 +294,8 @@ Output:
     }
   ]
 }
-``
+```
+
 ### $or
 
 Query string: `or[0][a]=>20&or[1][b]=$bar`
@@ -313,7 +325,8 @@ Output:
     }
   ]
 }
-``
+```
+
 ### $and
 
 Query string: `foo[and]=a&foo[and]=b`
@@ -344,7 +357,8 @@ Output:
     }
   ]
 }
-``
+```
+
 ### $and
 
 Query string: `and[0][a]=>20&and[1][b]=$bar`
@@ -374,7 +388,8 @@ Output:
     }
   ]
 }
-``
+```
+
 ### $nor
 
 Query string: `foo[nor]=a&foo[nor]=b`
@@ -405,7 +420,8 @@ Output:
     }
   ]
 }
-``
+```
+
 ### $nor
 
 Query string: `nor[0][a]=>20&nor[1][b]=$bar`
@@ -435,7 +451,8 @@ Output:
     }
   ]
 }
-``
+```
+
 ### $regex
 
 Query string: `foo=$bar`
@@ -455,4 +472,4 @@ Output:
     "$options": "i"
   }
 }
-``
+```
