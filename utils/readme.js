@@ -17,7 +17,12 @@ ${JSON.stringify(input, null, 2)}
 
 Output:
 \`\`\`json
-${JSON.stringify(output, null, 2)}
+${JSON.stringify(output, function (key, value) {
+  if (value instanceof RegExp) {
+    return `<actual regexp -> /${value.source}/${value.flags}>`;
+  }
+  return value;
+}, 2)}
 \`\`\`
 `
 }).join('');

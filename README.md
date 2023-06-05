@@ -283,7 +283,7 @@ Output:
   "$or": [
     {
       "foo": {
-        "$regex": {},
+        "$regex": "<actual regexp -> /bar/>",
         "$options": "i"
       }
     },
@@ -319,7 +319,7 @@ Output:
     },
     {
       "b": {
-        "$regex": {},
+        "$regex": "<actual regexp -> /bar/>",
         "$options": "i"
       }
     }
@@ -382,7 +382,7 @@ Output:
     },
     {
       "b": {
-        "$regex": {},
+        "$regex": "<actual regexp -> /bar/>",
         "$options": "i"
       }
     }
@@ -445,7 +445,7 @@ Output:
     },
     {
       "b": {
-        "$regex": {},
+        "$regex": "<actual regexp -> /bar/>",
         "$options": "i"
       }
     }
@@ -468,7 +468,7 @@ Output:
 ```json
 {
   "foo": {
-    "$regex": {},
+    "$regex": "<actual regexp -> /bar/>",
     "$options": "i"
   }
 }
