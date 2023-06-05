@@ -1,10 +1,4 @@
-const assert = require('assert');
-const qs = require('querystring');
-
-const { parse } = require('./index.js');
-
-const CASES = [
-
+module.exports = [
   ['$eq', 'foo=bar', { foo: 'bar' }, { foo: { $eq: 'bar' } }],
   ['$ne', 'foo=!bar', { foo: '!bar' }, { foo: { $ne: 'bar' } }],
   ['$exists', 'foo==bar', { foo: '=bar' }, { foo: { $exists: true } }],
@@ -21,47 +15,23 @@ const CASES = [
   ['$or', 'foo[or]=$bar&foo[or]=>20', { 'foo[or]': [ '$bar', '>20' ] },
     { $or: [ { foo: { $regex: new RegExp('bar'), $options: 'i' }}, { foo: { $gt: 20 }} ] }
   ],
+  ['$or', 'or[0][a]=>20&or[1][b]=$bar',
+    { 'or[0][a]': '>20', 'or[1][b]': '$bar' },
+    { $or: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
+  ],
   ['$and', 'foo[and]=a&foo[and]=b', { 'foo[and]': [ 'a', 'b' ] },
     { $and: [ { foo: { $eq: 'a' }}, { foo: { $eq: 'b' }} ] }
+  ],
+  ['$and', 'and[0][a]=>20&and[1][b]=$bar',
+    { 'and[0][a]': '>20', 'and[1][b]': '$bar' },
+    { $and: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
   ],
   ['$nor', 'foo[nor]=a&foo[nor]=b', { 'foo[nor]': [ 'a', 'b' ] },
     { $nor: [ { foo: { $eq: 'a' }}, { foo: { $eq: 'b' }} ] }
   ],
+  ['$nor', 'nor[0][a]=>20&nor[1][b]=$bar',
+    { 'nor[0][a]': '>20', 'nor[1][b]': '$bar' },
+    { $nor: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
+  ],
   ['$regex', 'foo=$bar', { foo: '$bar' }, { foo: { $regex: new RegExp('bar'), $options: 'i' } }],
 ]
-
-describe('Passing falsy or non object values', () => {
-  it('should return empty object', () => {
-    assert.deepStrictEqual(parse(), {});
-    assert.deepStrictEqual(parse(false), {});
-    assert.deepStrictEqual(parse(null), {});
-    assert.deepStrictEqual(parse(''), {});
-    assert.deepStrictEqual(parse(5), {});
-    assert.deepStrictEqual(parse([]), {});
-  });
-});
-describe('Passing working values', () => {
-  CASES.forEach(([ description, queryString, input, output ]) => {
-    it(`${description} - ${queryString} - ${JSON.stringify(input)} -> ${JSON.stringify(output)}`, () => {
-      const qsObj = JSON.parse(JSON.stringify(qs.parse(queryString)))
-      assert.deepStrictEqual(qsObj, input);
-      assert.deepStrictEqual(parse(input), output);
-    });
-  });
-})
-
-/* ------------------------------------------------------------------------ */
-
-function describe(description, callback) {
-  console.log(description);
-  callback();
-}
-function it(description, callback) {
-  try {
-    callback();
-    console.log(`  ✔ ${description}`);
-  } catch (error) {
-    console.error(`  ✘ ${description}`);
-    console.error(error);
-  }
-}
