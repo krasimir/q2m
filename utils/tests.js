@@ -17,8 +17,10 @@ describe('Passing falsy or non object values', () => {
 describe('Passing working values', () => {
   CASES.forEach(([ description, queryString, input, output ]) => {
     it(`${description} - ${queryString} - ${JSON.stringify(input)} -> ${JSON.stringify(output)}`, () => {
-      const qsObj = JSON.parse(JSON.stringify(qs.parse(queryString)))
-      assert.deepStrictEqual(qsObj, input);
+      if (queryString) {
+        const qsObj = JSON.parse(JSON.stringify(qs.parse(queryString)));
+        assert.deepStrictEqual(qsObj, input);
+      }
       assert.deepStrictEqual(parse(input), output);
     });
   });

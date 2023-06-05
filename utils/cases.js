@@ -28,6 +28,13 @@ module.exports = [
     { $or: [ { b: { $regex: new RegExp('bar'), $options: 'i' }} ] },
     true
   ],
+  [
+    '$or',
+    undefined,
+    { 'or[0][_id]': undefined, 'or[1][name]': '$bar' },
+    { $or: [ { name: { $regex: new RegExp('bar'), $options: 'i' }} ] },
+    true
+  ],
   ['$and', 'foo[and]=a&foo[and]=b', { 'foo[and]': [ 'a', 'b' ] },
     { $and: [ { foo: { $eq: 'a' }}, { foo: { $eq: 'b' }} ] }
   ],

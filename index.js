@@ -7,8 +7,8 @@ function parse(obj) {
   
   let res = {};
   Object.keys(obj).forEach(key => {
-    let value = obj[key];
-    if (typeof value === 'string') {
+    const value = obj[key];
+    if (typeof value === 'string' && value !== '') {
        if (key.match(NOR_REGEXP)) {
         const match = key.match(NOR_REGEXP);
         if (isNumeric(match[1])) {
@@ -16,11 +16,7 @@ function parse(obj) {
           const field = match[2];
           const value = obj[key];
           if (!res['$nor']) res['$nor'] = [];
-          if (value) {
-            res['$nor'][index] = { [field]: parseStringValue(value) };
-          } else {
-            res['$nor'] = false;
-          }
+          res['$nor'][index] = { [field]: parseStringValue(value) };
         }
       } else if (key.match(OR_REGEXP)) {
         const match = key.match(OR_REGEXP);
@@ -29,11 +25,7 @@ function parse(obj) {
           const field = match[2];
           const value = obj[key];
           if (!res['$or']) res['$or'] = [];
-          if (value) {
-            res['$or'][index] = { [field]: parseStringValue(value) };
-          } else {
-            res['$or'] = false;
-          }
+          res['$or'][index] = { [field]: parseStringValue(value) };
         }
       } else if (key.match(AND_REGEXP)) {
         const match = key.match(AND_REGEXP);
@@ -42,11 +34,7 @@ function parse(obj) {
           const field = match[2];
           const value = obj[key];
           if (!res['$and']) res['$and'] = [];
-          if (value) {
-            res['$and'][index] = { [field]: parseStringValue(value) };
-          } else {
-            res['$and'] = false;
-          }
+          res['$and'][index] = { [field]: parseStringValue(value) };
         }
       } else {
         res[key] = parseStringValue(value);
