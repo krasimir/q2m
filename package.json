@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/krasimir/q2m#readme",
   "devDependencies": {
-    "chokidar-cli": "3.0.0"
+    "chokidar-cli": "3.0.0",
+    "qs": "^6.11.2"
   }
 }

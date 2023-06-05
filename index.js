@@ -43,10 +43,21 @@ function parse(obj) {
       if (key === 'or' || key === 'and' || key === 'nor') {
         res['$' + key] = value.map(criteria => {
           Object.keys(criteria).forEach(cKey => {
-            criteria[cKey] = parseStringValue(criteria[cKey]);
+            if (typeof criteria[cKey] === 'string') {
+              criteria[cKey] = parseStringValue(criteria[cKey]);
+            } else {
+              delete criteria[cKey];
+            }
           });
-          return criteria;
-        });
+          return isObjectEmpty(criteria) ? false : criteria;
+        }).filter(Boolean);
+      } else if (key.match(/\!$/)) {
+        key = key.replace(/\!$/, '');
+        res[key] = { $nin: value };
+      } else {
+        res[key] = { $in: value };
+      }
+      /*
       } else if (key.match(/\!\[\]$/)) {
         key = key.replace(/\!\[\]$/, '');
         res[key] = { $nin: value };
@@ -63,6 +74,7 @@ function parse(obj) {
         key = key.replace(/\[nor\]$/, '');
         res['$nor'] = value.map(v => ({ [key]: v ? parseStringValue(v) : false })).filter(Boolean);
       }
+      */
     }
   });
 
@@ -116,4 +128,7 @@ module.exports = {
 /* ------------------------------------------------------------------------ utils */
 function isNumeric(value) {
   return !isNaN(value - parseFloat(value));
+}
+function isObjectEmpty(obj) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
 }

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const qs = require('querystring');
+const qs = require('qs');
 
 const { parse } = require('../index.js');
 const CASES = require('./cases');
@@ -18,7 +18,7 @@ describe('Passing working values', () => {
   CASES.forEach(([ description, queryString, input, output ]) => {
     it(`${description} - ${queryString} - ${JSON.stringify(input)} -> ${JSON.stringify(output)}`, () => {
       if (queryString) {
-        const qsObj = JSON.parse(JSON.stringify(qs.parse(queryString)));
+        const qsObj = qs.parse(queryString);
         assert.deepStrictEqual(qsObj, input);
       }
       assert.deepStrictEqual(parse(input), output);

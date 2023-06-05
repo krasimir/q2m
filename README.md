@@ -19,6 +19,8 @@ parse({ foo: 'bar' });
 
 ## Mapping
 
+_(Have in mind that for the query string to object convertion the library uses [qs](https://www.npmjs.com/package/qs) )_
+
 ### $eq
 
 Query string: `foo=bar`
@@ -186,7 +188,7 @@ Query string: `foo[]=a&foo[]=b`
 Object passed to `parse` function:
 ```json
 {
-  "foo[]": [
+  "foo": [
     "a",
     "b"
   ]
@@ -212,7 +214,7 @@ Query string: `foo![]=a&foo![]=b`
 Object passed to `parse` function:
 ```json
 {
-  "foo![]": [
+  "foo!": [
     "a",
     "b"
   ]
@@ -233,78 +235,19 @@ Output:
 
 ### $or
 
-Query string: `foo[or]=a&foo[or]=b`
-
-Object passed to `parse` function:
-```json
-{
-  "foo[or]": [
-    "a",
-    "b"
-  ]
-}
-```
-
-Output:
-```json
-{
-  "$or": [
-    {
-      "foo": {
-        "$eq": "a"
-      }
-    },
-    {
-      "foo": {
-        "$eq": "b"
-      }
-    }
-  ]
-}
-```
-
-### $or
-
-Query string: `foo[or]=$bar&foo[or]=>20`
-
-Object passed to `parse` function:
-```json
-{
-  "foo[or]": [
-    "$bar",
-    ">20"
-  ]
-}
-```
-
-Output:
-```json
-{
-  "$or": [
-    {
-      "foo": {
-        "$regex": "<actual regexp -> /bar/>",
-        "$options": "i"
-      }
-    },
-    {
-      "foo": {
-        "$gt": 20
-      }
-    }
-  ]
-}
-```
-
-### $or
-
 Query string: `or[0][a]=>20&or[1][b]=$bar`
 
 Object passed to `parse` function:
 ```json
 {
-  "or[0][a]": ">20",
-  "or[1][b]": "$bar"
+  "or": [
+    {
+      "a": ">20"
+    },
+    {
+      "b": "$bar"
+    }
+  ]
 }
 ```
 
@@ -321,38 +264,6 @@ Output:
       "b": {
         "$regex": "<actual regexp -> /bar/>",
         "$options": "i"
-      }
-    }
-  ]
-}
-```
-
-### $and
-
-Query string: `foo[and]=a&foo[and]=b`
-
-Object passed to `parse` function:
-```json
-{
-  "foo[and]": [
-    "a",
-    "b"
-  ]
-}
-```
-
-Output:
-```json
-{
-  "$and": [
-    {
-      "foo": {
-        "$eq": "a"
-      }
-    },
-    {
-      "foo": {
-        "$eq": "b"
       }
     }
   ]
@@ -366,8 +277,14 @@ Query string: `and[0][a]=>20&and[1][b]=$bar`
 Object passed to `parse` function:
 ```json
 {
-  "and[0][a]": ">20",
-  "and[1][b]": "$bar"
+  "and": [
+    {
+      "a": ">20"
+    },
+    {
+      "b": "$bar"
+    }
+  ]
 }
 ```
 
@@ -392,45 +309,19 @@ Output:
 
 ### $nor
 
-Query string: `foo[nor]=a&foo[nor]=b`
-
-Object passed to `parse` function:
-```json
-{
-  "foo[nor]": [
-    "a",
-    "b"
-  ]
-}
-```
-
-Output:
-```json
-{
-  "$nor": [
-    {
-      "foo": {
-        "$eq": "a"
-      }
-    },
-    {
-      "foo": {
-        "$eq": "b"
-      }
-    }
-  ]
-}
-```
-
-### $nor
-
 Query string: `nor[0][a]=>20&nor[1][b]=$bar`
 
 Object passed to `parse` function:
 ```json
 {
-  "nor[0][a]": ">20",
-  "nor[1][b]": "$bar"
+  "nor": [
+    {
+      "a": ">20"
+    },
+    {
+      "b": "$bar"
+    }
+  ]
 }
 ```
 
