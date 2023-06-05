@@ -1,0 +1,30 @@
+{
+  "name": "q2m",
+  "version": "0.1.0",
+  "description": "Transfrom the params passed via GET to a properly written MongoDB query object",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./test.js",
+    "test-watch": "chokidar \"./*.js\" -c \"yarn test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krasimir/q2m.git"
+  },
+  "keywords": [
+    "query",
+    "mongodb",
+    "URL",
+    "params",
+    "GET"
+  ],
+  "author": "Krasimir Tsonev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krasimir/q2m/issues"
+  },
+  "homepage": "https://github.com/krasimir/q2m#readme",
+  "devDependencies": {
+    "chokidar-cli": "3.0.0"
+  }
+}
