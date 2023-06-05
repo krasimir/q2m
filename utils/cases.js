@@ -13,35 +13,35 @@ module.exports = [
     '$or',
     'or[0][a]=>20&or[1][b]=$bar',
     { or: [ { a: '>20' }, { b: '$bar'} ] },
-    { $or: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
+    { $or: [ { a: { $gt: 20 }}, { b: { $regex: 'bar', $options: 'i' }} ] }
   ],
   [
     '$or',
     'or[0][a]=&or[1][b]=$bar',
     { or: [ { a: '' }, { b: '$bar'} ] },
-    { $or: [ { a: { $eq: '' } }, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] },
+    { $or: [ { a: { $eq: '' } }, { b: { $regex: 'bar', $options: 'i' }} ] },
     true
   ],
   [
     '$or',
     undefined,
     { or: [ { a: undefined }, { b: '$bar'} ] },
-    { $or: [ { b: { $regex: new RegExp('bar'), $options: 'i' }} ] },
+    { $or: [ { b: { $regex: 'bar', $options: 'i' }} ] },
     true
   ],
   [
     '$and',
     'and[0][a]=>20&and[1][b]=$bar',
     { and: [ { a: '>20' }, { b: '$bar'} ] },
-    { $and: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
+    { $and: [ { a: { $gt: 20 }}, { b: { $regex: 'bar', $options: 'i' }} ] }
   ],
   [
     '$nor',
     'nor[0][a]=>20&nor[1][b]=$bar',
     { nor: [ { a: '>20' }, { b: '$bar'} ] },    
-    { $nor: [ { a: { $gt: 20 }}, { b: { $regex: new RegExp('bar'), $options: 'i' }} ] }
+    { $nor: [ { a: { $gt: 20 }}, { b: { $regex: 'bar', $options: 'i' }} ] }
   ],
-  ['$regex', 'foo=$bar', { foo: '$bar' }, { foo: { $regex: new RegExp('bar'), $options: 'i' } }],
-  ['$regex', 'foo=%24bar', { foo: '$bar' }, { foo: { $regex: new RegExp('bar'), $options: 'i' } }, true],
-  ['$regex', undefined, { foo: '%24bar' }, { foo: { $regex: new RegExp('bar'), $options: 'i' } }, true],
+  ['$regex', 'foo=$bar', { foo: '$bar' }, { foo: { $regex: 'bar', $options: 'i' } }],
+  ['$regex', 'foo=%24bar', { foo: '$bar' }, { foo: { $regex: 'bar', $options: 'i' } }, true],
+  ['$regex', undefined, { foo: '%24bar' }, { foo: { $regex: 'bar', $options: 'i' } }, true],
 ];

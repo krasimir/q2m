@@ -262,7 +262,7 @@ Output:
     },
     {
       "b": {
-        "$regex": "<actual regexp -> /bar/>",
+        "$regex": "bar",
         "$options": "i"
       }
     }
@@ -299,7 +299,7 @@ Output:
     },
     {
       "b": {
-        "$regex": "<actual regexp -> /bar/>",
+        "$regex": "bar",
         "$options": "i"
       }
     }
@@ -336,7 +336,7 @@ Output:
     },
     {
       "b": {
-        "$regex": "<actual regexp -> /bar/>",
+        "$regex": "bar",
         "$options": "i"
       }
     }
@@ -359,7 +359,7 @@ Output:
 ```json
 {
   "foo": {
-    "$regex": "<actual regexp -> /bar/>",
+    "$regex": "bar",
     "$options": "i"
   }
 }

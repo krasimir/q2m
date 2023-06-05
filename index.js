@@ -97,7 +97,7 @@ function parseStringValue(value) {
     }
   } else if (value.match(/^\$/)) {
     value = value.replace(/^\$/, '');
-    return { $regex: new RegExp(value), $options: 'i' };
+    return { $regex: value, $options: 'i' };
   } else {
     return { $eq: value };
   }
