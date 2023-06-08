@@ -30,7 +30,7 @@ module.exports = [
     true
   ],
   [
-    '$or (nested variant)',
+    '$or',
     undefined,
     { or : [ { a: '$foo'}, { b: [ 'n', 'm' ] } ] },
     {

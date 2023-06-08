@@ -270,7 +270,7 @@ Output:
 }
 ```
 
-### $or (nested variant)
+### $or
 
 
 
