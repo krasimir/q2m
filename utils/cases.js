@@ -30,6 +30,26 @@ module.exports = [
     true
   ],
   [
+    '$or (nested variant)',
+    undefined,
+    { or : [ { a: '$foo'}, { b: [ 'n', 'm' ] } ] },
+    {
+      $or: [
+        {
+          a:{
+            $options: "i",
+            $regex: "foo"
+          }
+        },
+        {
+          b: {
+            $in: ["n","m"]
+          }
+        }
+      ]
+    },
+  ],
+  [
     '$and',
     'and[0][a]=>20&and[1][b]=$bar',
     { and: [ { a: '>20' }, { b: '$bar'} ] },
@@ -45,3 +65,5 @@ module.exports = [
   ['$regex', 'foo=%24bar', { foo: '$bar' }, { foo: { $regex: 'bar', $options: 'i' } }, true],
   ['$regex', undefined, { foo: '%24bar' }, { foo: { $regex: 'bar', $options: 'i' } }, true],
 ];
+
+// { or: [ { a: [] }] }

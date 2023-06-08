@@ -46,6 +46,10 @@ function parse(obj) {
           Object.keys(criteria).forEach(cKey => {
             if (typeof criteria[cKey] === 'string') {
               criteria[cKey] = parseStringValue(criteria[cKey]);
+            } else if (Array.isArray(criteria[cKey]) && criteria[cKey].every(v => typeof v === 'string')) {
+              criteria[cKey] = {
+                $in: criteria[cKey]
+              }
             } else {
               delete criteria[cKey];
             }
