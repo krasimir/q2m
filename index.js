@@ -82,29 +82,21 @@ function parseStringValue(value) {
     return { $exists: true };
   } else if (value.match(/^>=/)) {
     value = value.replace(/^>=/, '');
-    if (isNumeric(value)) {
-      return { $gte: parseFloat(value) };
-    }
+    return { $gte: normalizeValue(value) };
   } else if (value.match(/^>/)) {
     value = value.replace(/^>/, '');
-    if (isNumeric(value)) {
-      return { $gt: parseFloat(value) };
-    }
+    return { $gt: normalizeValue(value) };
   } else if (value.match(/^<=/)) {
     value = value.replace(/^<=/, '');
-    if (isNumeric(value)) {
-      return { $lte: parseFloat(value) };
-    }
+    return { $lte: normalizeValue(value) };
   } else if (value.match(/^</)) {
     value = value.replace(/^</, '');
-    if (isNumeric(value)) {
-      return { $lt: parseFloat(value) };
-    }
+    return { $lt: normalizeValue(value) };
   } else if (value.match(/^\$/)) {
     value = value.replace(/^\$/, '');
     return { $regex: value, $options: 'i' };
   } else {
-    return { $eq: value };
+    return { $eq: normalizeValue(value) };
   }
 }
 
@@ -113,6 +105,15 @@ module.exports = {
 }
 
 /* ------------------------------------------------------------------------ utils */
+function normalizeValue(value) {
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  if (value === 'null') return null;
+  if (value === 'undefined') return undefined;
+  if (isNumeric(value)) return parseFloat(value);
+  if (isValidDateStr(value)) return new Date(value);
+  return value;
+}
 function isNumeric(value) {
   return !isNaN(value - parseFloat(value));
 }
@@ -121,4 +122,7 @@ function isObjectEmpty(obj) {
 }
 function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
+}
+function isValidDateStr(str) {
+  return !isNaN(Date.parse(str));
 }

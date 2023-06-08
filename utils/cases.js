@@ -64,6 +64,6 @@ module.exports = [
   ['$regex', 'foo=$bar', { foo: '$bar' }, { foo: { $regex: 'bar', $options: 'i' } }],
   ['$regex', 'foo=%24bar', { foo: '$bar' }, { foo: { $regex: 'bar', $options: 'i' } }, true],
   ['$regex', undefined, { foo: '%24bar' }, { foo: { $regex: 'bar', $options: 'i' } }, true],
+  ['date', 'foo=2023-6-7', { foo: '2023-6-7' }, { foo: { $eq: new Date('2023-6-7') } }],
+  ['date', 'foo=<2023-6-7', { foo: '<2023-6-7' }, { foo: { $lt: new Date('2023-6-7') } }],
 ];
-
-// { or: [ { a: [] }] }

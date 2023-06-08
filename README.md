@@ -407,3 +407,43 @@ Output:
   }
 }
 ```
+
+### date
+
+Query string: `foo=2023-6-7`
+
+Object passed to `parse` function:
+```json
+{
+  "foo": "2023-6-7"
+}
+```
+
+Output:
+```json
+{
+  "foo": {
+    "$eq": "<date object>"
+  }
+}
+```
+
+### date
+
+Query string: `foo=<2023-6-7`
+
+Object passed to `parse` function:
+```json
+{
+  "foo": "<2023-6-7"
+}
+```
+
+Output:
+```json
+{
+  "foo": {
+    "$lt": "<date object>"
+  }
+}
+```
