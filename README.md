@@ -12,8 +12,8 @@ A URL query object to MongoDB query
 - [$lte](#lte)
 - [$in](#in)
 - [$nin](#nin)
-- [$or](#or)
-- [$or](#or)
+- [$or (1)](#or--1-)
+- [$or (2)](#or--2-)
 - [$and](#and)
 - [$nor](#nor)
 - [$regex](#regex)
@@ -252,7 +252,7 @@ Output:
 }
 ```
 
-### $or
+### $or (1)
 
 Query string: `or[0][a]=>20&or[1][b]=$bar`
 
@@ -289,7 +289,7 @@ Output:
 }
 ```
 
-### $or
+### $or (2)
 
 
 
