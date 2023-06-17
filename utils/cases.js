@@ -10,7 +10,7 @@ module.exports = [
   ['$in', 'foo[]=a&foo[]=b', { 'foo': [ 'a', 'b' ] }, { foo: { $in: [ 'a', 'b' ] } }],
   ['$nin', 'foo![]=a&foo![]=b', { 'foo!': [ 'a', 'b' ] }, { foo: { $nin: [ 'a', 'b' ] } }],
   [
-    '$or',
+    '$or (1)',
     'or[0][a]=>20&or[1][b]=$bar',
     { or: [ { a: '>20' }, { b: '$bar'} ] },
     { $or: [ { a: { $gt: 20 }}, { b: { $regex: 'bar', $options: 'i' }} ] }
@@ -30,7 +30,7 @@ module.exports = [
     true
   ],
   [
-    '$or',
+    '$or (2)',
     undefined,
     { or : [ { a: '$foo'}, { b: [ 'n', 'm' ] } ] },
     {
