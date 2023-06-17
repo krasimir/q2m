@@ -3,8 +3,10 @@ const fs = require('fs');
 const readme = fs.readFileSync(__dirname + '/README.template.md', 'utf8');
 const CASES = require('./cases');
 
+let menuStr = '';
 const casesStr = CASES.map(([ description, queryString, input, output, ignoreForReadme ]) => {
   if (ignoreForReadme) return '';
+  menuStr += `- [${description}](#${createAnchorLink(description)})\n`;
   return `
 ### ${description}
 
@@ -29,8 +31,14 @@ ${JSON.stringify(output, function (key, value) {
 `
 }).join('');
 
-fs.writeFileSync(__dirname + '/../README.md', readme.replace('{cases}', casesStr));
+fs.writeFileSync(__dirname + '/../README.md', readme.replace('{cases}', casesStr).replace('{menu}', menuStr));
 
 function isValidDateStr(str) {
   return !isNaN(Date.parse(str));
+}
+function createAnchorLink(str) {
+  return str
+    .toLowerCase()
+    .replace(/\$/g, '')
+    .replace(/[^a-z0-9]/g, '-');
 }

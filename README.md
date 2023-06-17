@@ -2,6 +2,25 @@
 
 A URL query object to MongoDB query
 
+- [$eq](#eq)
+- [$ne](#ne)
+- [$exists](#exists)
+- [$exists](#exists)
+- [$gt](#gt)
+- [$gte](#gte)
+- [$lt](#lt)
+- [$lte](#lte)
+- [$in](#in)
+- [$nin](#nin)
+- [$or](#or)
+- [$or](#or)
+- [$and](#and)
+- [$nor](#nor)
+- [$regex](#regex)
+- [date](#date)
+- [date](#date)
+
+
 ## Why
 
 I needed to query MongoDB database from the URL. Basically transfrom the params passed via GET to a properly written MongoDB query object.

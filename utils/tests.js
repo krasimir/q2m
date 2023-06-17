@@ -14,6 +14,19 @@ describe('Passing falsy or non object values', () => {
     assert.deepStrictEqual(parse([]), {});
   });
 });
+describe('Passing a string', () => {
+  it('should use qs to transform the string to an object', () => {
+    assert.deepStrictEqual(
+      parse('and[0][a]=>20&and[1][b]=$bar'),
+      {
+        $and: [
+          { a: { $gt: 20 }},
+          { b: { $regex: 'bar', $options: 'i' }}
+        ]
+      }
+    );
+  });
+});
 describe('Passing working values', () => {
   CASES.forEach(([ description, queryString, input, output ]) => {
     it(`${description} - ${queryString} - ${JSON.stringify(input)} -> ${JSON.stringify(output)}`, () => {

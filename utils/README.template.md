@@ -2,6 +2,8 @@
 
 A URL query object to MongoDB query
 
+{menu}
+
 ## Why
 
 I needed to query MongoDB database from the URL. Basically transfrom the params passed via GET to a properly written MongoDB query object.

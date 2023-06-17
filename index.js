@@ -1,5 +1,11 @@
+const qs = require('qs');
+
 function parse(obj) {
-  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return {};
+  if (!obj) return {};
+  if (Array.isArray(obj)) return {};
+  if (typeof obj === 'string') {
+    obj = qs.parse(obj);
+  }
   obj = clone(obj);
 
   const OR_REGEXP = /or\[(.*)\]\[(.*)\]$/;
