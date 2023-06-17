@@ -44,7 +44,7 @@ _(The conversion from query string to object in the examples below is made with 
 
 Query string: `foo=bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "bar"
@@ -64,7 +64,7 @@ Output:
 
 Query string: `foo=!bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "!bar"
@@ -84,7 +84,7 @@ Output:
 
 Query string: `foo==bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "=bar"
@@ -104,7 +104,7 @@ Output:
 
 Query string: `foo=!=bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "!=bar"
@@ -124,7 +124,7 @@ Output:
 
 Query string: `foo=>20`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": ">20"
@@ -144,7 +144,7 @@ Output:
 
 Query string: `foo=>=20`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": ">=20"
@@ -164,7 +164,7 @@ Output:
 
 Query string: `foo=<20`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "<20"
@@ -184,7 +184,7 @@ Output:
 
 Query string: `foo=<=20`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "<=20"
@@ -204,7 +204,7 @@ Output:
 
 Query string: `foo[]=a&foo[]=b`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": [
@@ -230,7 +230,7 @@ Output:
 
 Query string: `foo![]=a&foo![]=b`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo!": [
@@ -256,7 +256,7 @@ Output:
 
 Query string: `or[0][a]=>20&or[1][b]=$bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "or": [
@@ -293,7 +293,7 @@ Output:
 
 
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "or": [
@@ -336,7 +336,7 @@ Output:
 
 Query string: `and[0][a]=>20&and[1][b]=$bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "and": [
@@ -373,7 +373,7 @@ Output:
 
 Query string: `nor[0][a]=>20&nor[1][b]=$bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "nor": [
@@ -410,7 +410,7 @@ Output:
 
 Query string: `foo=$bar`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "$bar"
@@ -431,7 +431,7 @@ Output:
 
 Query string: `foo=2023-6-7`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "2023-6-7"
@@ -451,7 +451,7 @@ Output:
 
 Query string: `foo=<2023-6-7`
 
-Object passed to `parse` function:
+Object:
 ```json
 {
   "foo": "<2023-6-7"

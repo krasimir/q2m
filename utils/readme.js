@@ -12,7 +12,7 @@ const casesStr = CASES.map(([ description, queryString, input, output, ignoreFor
 
 ${queryString ? `Query string: \`${queryString}\`` : ''}
 
-Object passed to \`parse\` function:
+Object:
 \`\`\`json
 ${JSON.stringify(input, null, 2)}
 \`\`\`
